@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: diabetes-mlops-deployment
+  labels:
+    app: diabetes-mlops
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: diabetes-mlops
+  template:
+    metadata:
+      labels:
+        app: diabetes-mlops
+    spec:
+      containers:
+        - name: diabetes-mlops-container
+          image: vinaypiska/diabetes-mlops-api:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+
